@@ -1,0 +1,52 @@
+name: "Development CI"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-image-build-publish:
+    name: Publish docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # - name: Login to Docker hub
+      #   uses: docker/login-action@v3
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Get current version
+        id: get-version
+        uses: beaconbrigade/package-json-version@v0.3
+        with:
+          path: .
+
+      - name: Log in to the github container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PASS_TOKEN }}
+
+      - name: Build docker image
+        run: docker build -t ghcr.io/${{ github.repository_owner }}/dashboard:${{ steps.get-version.outputs.version }} .
+
+      - name: Push docker image
+        run: docker push ghcr.io/${{ github.repository_owner }}/dashboard:${{ steps.get-version.outputs.version }}
+
+      # - name: Build docker image
+      #   run: docker build . --file Dockerfile --tag ruhulinfo/myapp:${{ github.sha }}
+
+      # - name: Push docker image
+      #   run: docker push ruhulinfo/myapp:${{ github.sha }}
+
+      # - name: Build and push Docker image
+      #   uses:
+      #   with:
+      #     context: .
+      #     push: true
+      #     tags:
+      #     labels:

@@ -1,0 +1,10 @@
+.yarn
+.next
+.github
+.swc
+dist
+node_modules
+
+storybook-static
+
+ecosystem.example.js
