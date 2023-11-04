@@ -16,4 +16,4 @@ services:
     volumes:
       - ./:/app
     networks:
-      - dashboard_nextjs
+      - dashboard_nextjs  # Updated network name
