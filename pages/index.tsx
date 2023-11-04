@@ -12,7 +12,7 @@ export default function Home() {
           </div>
         ))}
       </section>
-      <p>Landing page with test 16</p>
+      <p>Landing page with test 17</p>
     </main>
   );
 }
