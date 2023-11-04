@@ -14,6 +14,7 @@ FROM node:16.18.0-alpine
 
 WORKDIR /app
 COPY --from=build /app/package*.json ./
+COPY --from=build /app/docker-compose*.yml ./  
 RUN npm install --only=production
 COPY --from=build /app/.next ./.next
 
