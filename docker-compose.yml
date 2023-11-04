@@ -1,0 +1,19 @@
+version: "3"
+
+networks:
+  amarpet_nextjs:
+    driver: bridge
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: dashboard-main
+    stdin_open: true
+    volumes:
+      - ./:/app
+    networks:
+      - dashboard_nextjs
