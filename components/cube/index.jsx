@@ -53,7 +53,7 @@
 //     const manageMouseMove = (e) => {
 //         const { innerWidth, innerHeight } = window;
 //         const { clientX, clientY } = e; 
-//         const x =4 + (clientX / innerWidth)
+//         const x=4+(clientX/innerWidth)
 //         const y = 4 + (clientY / innerHeight)
 //         mouse.x.set(x);
 //         mouse.y.set(y);

@@ -17,3 +17,12 @@ services:
       - ./:/app
     networks:
       - dashboard_nextjs  # Updated network name
+
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./backened/Dockerfile
+    ports:
+      - 5000:5000
+    container_name: backend-server
