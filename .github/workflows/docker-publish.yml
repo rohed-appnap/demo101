@@ -34,7 +34,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}/test23:${{ steps.get-version.outputs.version }}
+          tags: ghcr.io/${{ github.repository }}/test24:${{ steps.get-version.outputs.version }}
         env:
           DOCKER_BUILDKIT: 1
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,7 +42,7 @@ jobs:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
-        host: ${{ secrets.HOST }}
+        host: ""
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
