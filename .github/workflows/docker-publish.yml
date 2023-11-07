@@ -34,7 +34,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }} | tr '[:upper:]' '[:lower:]':${{ steps.get-version.outputs.version }}
+          tags: ${{ steps.get-version.outputs.version }}
         env:
           DOCKER_BUILDKIT: 1
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
