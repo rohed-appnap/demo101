@@ -29,14 +29,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: ghcr.io/amarpet/test45:${{ steps.get-version.outputs.version }}
+     - name: Build and push Docker image
+       id: build-image
+        run: |
+          repository_name=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "Using repository name: $repository_name"
+          docker build -t ghcr.io/$repository_name:${{ steps.get-version.outputs.version }} .
+          echo "::set-output name=repository_name::$repository_name"
         env:
           DOCKER_BUILDKIT: 1
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/${{ steps.build-image.outputs.repository_name }}:${{ steps.get-version.outputs.version }}
+        env:
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: executing remote ssh commands using ssh key
