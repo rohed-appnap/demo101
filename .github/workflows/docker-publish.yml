@@ -46,9 +46,8 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         port: 22
-        script: |
-          docker-compose -f docker-compose.yml up
-
+        script: 
+          
 
       # - name: Pull Docker image
       #   run: docker pull ghcr.io/${{ github.repository }}/test15:${{ steps.get-version.outputs.version }}
